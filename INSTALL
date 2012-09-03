@@ -1,0 +1,19 @@
+Development installation
+========================
+
+- cd to the root of the project (e.g. trunk/)
+- build the extensions
+
+    python setup.py build
+
+- make a symbolic link to the .so files
+
+    ln -s build/lib.linux-x86_64-2.7/memory.so memory.so
+
+- edit the conf file
+
+    editor conf.py
+
+- run the program
+
+    python berserk.py
