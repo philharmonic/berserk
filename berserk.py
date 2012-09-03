@@ -28,7 +28,9 @@ def cpu():
 def run_from_conf(conf):
     #memory(size=conf.size)
     import memory
-    memory.run(10**3)
+    size_mb = conf.size
+    run_period = conf.run_period
+    memory.run(size_mb, run_period)
 
 def sample_run():
     while True:

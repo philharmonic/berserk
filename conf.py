@@ -1,4 +1,9 @@
+# General
+# ---------
+run_period = 10 # seconds
+
 # Memory consumption
 #-------------------
-#size in MB
-size = 3
+#size to occupy
+size = 3000 # MB
+
