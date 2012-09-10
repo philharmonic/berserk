@@ -1,3 +1,5 @@
+import math
+
 def log(something):
     print(something)
 
@@ -27,11 +29,29 @@ def cpu():
 
 def run_from_conf(conf):
     #memory(size=conf.size)
-    import memory
-    size_mb = conf.size
-    run_period = conf.run_period
-    memory.run(size_mb, run_period)
-
+    if conf.method=="memory":
+        import memory
+        size_mb = conf.size
+        run_period = conf.run_period
+        memory.run(size_mb, run_period)
+    elif conf.method=="time":
+        # get an estimate of the task complexity on this hardware
+        import fibonacci as fib
+        from datetime import datetime, timedelta
+        log("Looking for a %d second Fibonacci job." % (conf.run_period))
+        n, interval = fib.find_time(conf.run_period)
+        # parse run_time
+        t = datetime.strptime(conf.run_time,"%H:%M:%S")
+        delta = timedelta(hours=t.hour, minutes=t.minute, seconds=t.second)
+        run_time = delta.seconds
+        log("We want to run sth for %d seconds." % (run_time))
+        # adapt the number of runs
+        run_num = int(math.ceil(run_time/float(interval)))
+        # run the job
+        log("Doing %d runs of %dth Fibonacci number." % (run_num, n))
+        for i in range(run_num):
+            fib.fibonacci(n)
+    
 def sample_run():
     while True:
         memory()
