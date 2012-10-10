@@ -1,4 +1,5 @@
 import math
+from time import time
 
 def log(something):
     print(something)
@@ -49,8 +50,12 @@ def run_from_conf(conf):
         run_num = int(math.ceil(run_time/float(interval)))
         # run the job
         log("Doing %d runs of %dth Fibonacci number." % (run_num, n))
+        t1 = time()
         for i in range(run_num):
             fib.fibonacci(n)
+        t2 = time()
+        duration = t2-t1
+        print("Finished. It took: %.2f s (%.2f min)" % (duration, (duration)/60.))
     
 def sample_run():
     while True:
