@@ -1,5 +1,0 @@
-memorymodule.c
-berserk.egg-info/PKG-INFO
-berserk.egg-info/SOURCES.txt
-berserk.egg-info/dependency_links.txt
-berserk.egg-info/top_level.txt

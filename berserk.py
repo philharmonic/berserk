@@ -1,5 +1,6 @@
 import math
 from time import time
+from datetime import datetime
 
 def log(something):
     print(something)
@@ -51,15 +52,18 @@ def run_from_conf(conf):
         # run the job
         log("Doing %d runs of %dth Fibonacci number." % (run_num, n))
         t1 = time()
+        log("#start %s" % (str(datetime.now())))
         for i in range(run_num):
             fib.fibonacci(n)
         t2 = time()
+        log("#end %s" % (str(datetime.now())))
         duration = t2-t1
-        print("Finished. It took: %.2f s (%.2f min)" % (duration, (duration)/60.))
+        log("Finished. It took: %.2f s (%.2f min)" % (duration, (duration)/60.))
+        log("#runtime %f" % (duration))
     
 def sample_run():
     while True:
-        memory()
+        #memory()
         cpu()
 
 if __name__ == "__main__":
