@@ -1,6 +1,6 @@
 import math
 from time import time
-from datetime import datetime
+from datetime import datetime, timedelta
 import logging
 
 def log(something):
@@ -43,18 +43,20 @@ def run_from_conf(conf):
         # get an estimate of the task complexity on this hardware
         log("BERSERK BENCHMARK\n------------------")
         import fibonacci as fib
-        from datetime import datetime, timedelta
         log("Looking for %d s Fibonacci job." % (conf.run_period))
         n, interval = fib.find_time(conf.run_period)
+        log("Found 1st longer calculation (t = %d) and it's for n = %d." % (interval, n))
         # parse run_time
         t = datetime.strptime(conf.run_time,"%H:%M:%S")
         delta = timedelta(hours=t.hour, minutes=t.minute, seconds=t.second)
-        run_time = delta.seconds
+        run_time = delta.total_seconds()
         log("We want to run a job for %s (%d s)." % (str(delta), run_time))
         # adapt the number of runs
         run_num = int(math.ceil(run_time/float(interval)))
         # run the job
-        log("Doing %d runs of %dth Fibonacci number." % (run_num, n))
+        estimation = timedelta(seconds = run_num*interval)
+        log("Doing %d runs of %dth Fibonacci number calculation" % (run_num, n))
+        log("#estimation %s." % (str(estimation)))
         t1 = time()#TODO: get rid of time, using datetime for runs lasting multiple days
         dt1 = datetime.now()
         log("#start %s" % (str(dt1)))

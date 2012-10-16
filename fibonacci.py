@@ -6,9 +6,9 @@ def fibonacci(n):
     if n<=0:
         return 0
     if n==1 or n==2:
-	return 1
+        return 1
     else:
-	return fibonacci(n-1)+fibonacci(n-2)
+        return fibonacci(n-1)+fibonacci(n-2)
 
 def run_on_list(n = None):
     try:
@@ -31,7 +31,8 @@ def run(n = None):
 
 def find_time(t = None):
     """
-    @param t: time in minutes
+    @param t: time in seconds
+    @return: n for which the calculation is longer than t, the exact time of this calc.
     """
     if t == None:
         t = int(sys.argv[1])
@@ -43,7 +44,6 @@ def find_time(t = None):
         fibonacci(n)
         t2 = time.time()
         measured = t2-t1
-    print("Found 1st longer calculation (t = %d) and it's for n = %d." % (measured, n))
     return n, measured
 
 if __name__=="__main__":
