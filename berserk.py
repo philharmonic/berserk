@@ -41,28 +41,32 @@ def run_from_conf(conf):
         memory.run(size_mb, run_period)
     elif conf.method=="time":
         # get an estimate of the task complexity on this hardware
+        log("BERSERK BENCHMARK\n------------------")
         import fibonacci as fib
         from datetime import datetime, timedelta
-        log("Looking for a %d second Fibonacci job." % (conf.run_period))
+        log("Looking for %d s Fibonacci job." % (conf.run_period))
         n, interval = fib.find_time(conf.run_period)
         # parse run_time
         t = datetime.strptime(conf.run_time,"%H:%M:%S")
         delta = timedelta(hours=t.hour, minutes=t.minute, seconds=t.second)
         run_time = delta.seconds
-        log("We want to run sth for %d seconds." % (run_time))
+        log("We want to run a job for %s (%d s)." % (str(delta), run_time))
         # adapt the number of runs
         run_num = int(math.ceil(run_time/float(interval)))
         # run the job
         log("Doing %d runs of %dth Fibonacci number." % (run_num, n))
-        t1 = time()
-        log("#start %s" % (str(datetime.now())))
+        t1 = time()#TODO: get rid of time, using datetime for runs lasting multiple days
+        dt1 = datetime.now()
+        log("#start %s" % (str(dt1)))
         for i in range(run_num):
             fib.fibonacci(n)
         t2 = time()
-        log("#end %s" % (str(datetime.now())))
+        dt2 = datetime.now()
+        log("#end %s" % (str(dt2)))
         duration = t2-t1
         log("Finished. It took: %.2f s (%.2f min)" % (duration, (duration)/60.))
-        log("#runtime %f" % (duration))
+        dt_runtime = dt2-dt1
+        log("#runtime %s (%d s)" % (str(dt_runtime), dt_runtime.seconds))
     
 def sample_run():
     while True:
