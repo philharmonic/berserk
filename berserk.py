@@ -1,9 +1,11 @@
 import math
 from time import time
 from datetime import datetime
+import logging
 
 def log(something):
     print(something)
+    logging.info(something)
 
 
 # MEMORY
@@ -30,6 +32,7 @@ def cpu():
     a = 0.8*2.3
 
 def run_from_conf(conf):
+    logging.basicConfig(filename='berserk.log', level=logging.DEBUG)
     #memory(size=conf.size)
     if conf.method=="memory":
         import memory
