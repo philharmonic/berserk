@@ -31,7 +31,7 @@ struct Block* occupy(int size){
       blocks[i].data[j] = j;
   }
 
-  sprintf(message, "Reserved %d blocks of 1 MB (%d bytes). %d MB total.\n", size, (int) blockSize, size*(int)blockSize);
+  sprintf(message, "Reserved %d blocks of 1 MB (%d bytes). %.2f MB total.\n", size, (int) blockSize, size*(int)blockSize/1024.0/1024.0);
   quick_log(message);
 
   return blocks;

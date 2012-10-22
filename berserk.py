@@ -32,7 +32,9 @@ def cpu():
     a = 0.8*2.3
 
 def run_from_conf(conf):
-    logging.basicConfig(filename='berserk.log', level=logging.DEBUG)
+    logging.basicConfig(filename='berserk.log',
+                        level=logging.DEBUG,
+                        format='%(asctime)s %(message)s')
     #memory(size=conf.size)
     if conf.method=="memory":
         import memory
