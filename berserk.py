@@ -41,7 +41,7 @@ def run_from_conf(conf):
         memory.run(size_mb, run_period)
     elif conf.method=="time":
         # get an estimate of the task complexity on this hardware
-        log("BERSERK BENCHMARK\n------------------")
+        log("------------------\nBERSERK BENCHMARK\n------------------")
         import fibonacci as fib
         log("Looking for %d s Fibonacci job." % (conf.run_period))
         n, interval = fib.find_time(conf.run_period)
