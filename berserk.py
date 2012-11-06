@@ -77,7 +77,10 @@ def run_from_conf(conf):
         log("#runtime %s (%d s)" % (str(dt_runtime), dt_runtime.seconds))
         #results = {"dt_runtime": dt_runtime, "runtime": duration}
         results = (dt1, dt2)
-        finalize(results)
+        try:
+            finalize(results)
+        except:
+            log("Warning: Can't notify the benchmark master of the outcome.")
     
 def sample_run():
     while True:
