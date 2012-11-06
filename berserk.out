@@ -1,0 +1,13 @@
+------------------
+BERSERK BENCHMARK
+------------------
+Looking for 1 s Fibonacci job.
+Found 1st longer calculation (t = 1) and it's for n = 32.
+We want to run a job for 0:00:03 (3 s).
+Doing 3 runs of 32th Fibonacci number calculation
+#estimation 0:00:03.146445.
+#start 2012-11-06 14:33:12.311584
+#end 2012-11-06 14:33:15.454622
+Finished. It took: 3.14 s (0.05 min)
+#runtime 0:00:03.143038 (3 s)
+I am doing a dummy benchmark! Yeiii :)

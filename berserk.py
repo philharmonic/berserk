@@ -2,6 +2,7 @@ import math
 from time import time
 from datetime import datetime, timedelta
 import logging
+import benchmark_notifier
 
 def log(something):
     print(something)
@@ -30,6 +31,9 @@ def log(something):
 
 def cpu():
     a = 0.8*2.3
+    
+def finalize(results):
+    benchmark_notifier.notify_master(host=conf.host, data=results)
 
 def run_from_conf(conf):
     logging.basicConfig(filename='berserk.log',
@@ -71,6 +75,9 @@ def run_from_conf(conf):
         log("Finished. It took: %.2f s (%.2f min)" % (duration, (duration)/60.))
         dt_runtime = dt2-dt1
         log("#runtime %s (%d s)" % (str(dt_runtime), dt_runtime.seconds))
+        #results = {"dt_runtime": dt_runtime, "runtime": duration}
+        results = (dt1, dt2)
+        finalize(results)
     
 def sample_run():
     while True:

@@ -1,0 +1,28 @@
+Traceback (most recent call last):
+  File "berserk.py", line 89, in <module>
+    run_from_conf(conf)
+  File "berserk.py", line 79, in run_from_conf
+    finalize(results)
+  File "berserk.py", line 36, in finalize
+    benchmark_notifier.notify_master(host=conf.host, data=results)
+  File "/home/kermit/projekti/lp/berserk/trunk/benchmark_notifier.py", line 22, in notify_master
+    p.done(results="Waiting for IKEA")
+  File "/usr/lib/pymodules/python2.7/SOAPpy/Client.py", line 470, in __call__
+    return self.__r_call(*args, **kw)
+  File "/usr/lib/pymodules/python2.7/SOAPpy/Client.py", line 492, in __r_call
+    self.__hd, self.__ma)
+  File "/usr/lib/pymodules/python2.7/SOAPpy/Client.py", line 363, in __call
+    config = self.config)
+  File "/usr/lib/pymodules/python2.7/SOAPpy/Client.py", line 187, in call
+    r.endheaders()
+  File "/usr/lib/python2.7/httplib.py", line 958, in endheaders
+    self._send_output(message_body)
+  File "/usr/lib/python2.7/httplib.py", line 818, in _send_output
+    self.send(msg)
+  File "/usr/lib/python2.7/httplib.py", line 780, in send
+    self.connect()
+  File "/usr/lib/python2.7/httplib.py", line 761, in connect
+    self.timeout, self.source_address)
+  File "/usr/lib/python2.7/socket.py", line 571, in create_connection
+    raise err
+socket.error: [Errno 111] Connection refused
