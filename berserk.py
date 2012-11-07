@@ -33,6 +33,7 @@ def cpu():
     a = 0.8*2.3
     
 def finalize(results):
+    log("------------------\n")
     benchmark_notifier.notify_master(host=conf.host, data=results)
 
 def run_from_conf(conf):
