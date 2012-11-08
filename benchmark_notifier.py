@@ -13,7 +13,7 @@ def notify_master(host='http://localhost:8088/', message="done", data=None):
 #        p.done(results="")
 #    except AttributeError:
 #        pass
-    p = SOAPpy.SOAPProxy('http://localhost:8088/')
+    p = SOAPpy.SOAPProxy(host)
     try:
         p.done(results=data)
     except AttributeError:
