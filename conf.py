@@ -3,6 +3,7 @@
 # how long to run the benchmark
 # hh:mm:ss
 run_time = "00:00:03"
+#run_time = "23:59:59"
 
 #methods avaliable:
 # - memory
@@ -18,4 +19,4 @@ size = 300 # MB
 # Host to notify with the results
 #---------------------------------
 host = 'http://localhost:8088/'
-
+#host = 'http://snowwhite:8088/'
