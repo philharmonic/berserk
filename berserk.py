@@ -36,7 +36,7 @@ def finalize(results):
     log("------------------\n")
     benchmark_notifier.notify_master(host=conf.host, data=results)
 
-def run_from_conf(conf):
+def run_from_conf(conf): #TODO: run until datetime.now()==designated_time
     logging.basicConfig(filename='berserk.log',
                         level=logging.DEBUG,
                         format='%(asctime)s %(message)s')
