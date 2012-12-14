@@ -9,15 +9,17 @@ auto_duration=True
 # if False, you have to manually specify:
 iterations = 69723 
 n = 30
+# the approx. length of a single run cycle
+run_period = 1 # seconds
 
 #methods avaliable:
 # - memory
-# - time
-method = "time"
+# - cpu
+method = "cpu"
 
 # Memory consumption
 #-------------------
-run_period = 1 # seconds
+
 #size to occupy
 size = 300 # MB
 

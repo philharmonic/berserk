@@ -29,6 +29,10 @@ def log(something):
 #     # read / write
 #---------------------
 
+def memory(size_mb,run_period):
+    import memory
+    memory.run(size_mb, run_period)
+
 def cpu():
     a = 0.8*2.3
     
@@ -40,13 +44,13 @@ def run_from_conf(conf): #TODO: run until datetime.now()==designated_time
     logging.basicConfig(filename='berserk.log',
                         level=logging.DEBUG,
                         format='%(asctime)s %(message)s')
-    #memory(size=conf.size)
     if conf.method=="memory":
-        import memory
         size_mb = conf.size
         run_period = conf.run_period
-        memory.run(size_mb, run_period)
-    elif conf.method=="time":
+        memory(size_mb, run_period)
+    elif conf.method=="cpu":
+        cpu()
+    elif conf.method=="cpu":
         log("------------------\nBERSERK BENCHMARK\n------------------")
         import fibonacci as fib
         if conf.auto_duration:
@@ -69,16 +73,12 @@ def run_from_conf(conf): #TODO: run until datetime.now()==designated_time
             run_num = conf.iterations
             n = conf.n
         log("Doing %d runs of %dth Fibonacci number calculation" % (run_num, n))
-        t1 = time()#TODO: get rid of time, using datetime for runs lasting multiple days
         dt1 = datetime.now()
         log("#start %s" % (str(dt1)))
         for i in range(run_num):
             fib.fibonacci(n)
-        t2 = time()
         dt2 = datetime.now()
         log("#end %s" % (str(dt2)))
-        duration = t2-t1
-        log("Finished. It took: %.2f s (%.2f min)" % (duration, (duration)/60.))
         dt_runtime = dt2-dt1
         log("#runtime %s (%d s)" % (str(dt_runtime), dt_runtime.seconds))
         #results = {"dt_runtime": dt_runtime, "runtime": duration}
