@@ -7,8 +7,9 @@ duration = "00:00:03"
 #duration = "23:59:59"
 auto_duration=True
 # if False, you have to manually specify:
-iterations = 69723 
-n = 30
+iterations = 3
+# single job complexity (e.g. n for Fibonacci) 
+iteration_size = 30
 # the approx. length of a single run cycle
 run_period = 1 # seconds
 
