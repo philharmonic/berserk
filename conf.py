@@ -3,7 +3,7 @@
 # how long to run the benchmark
 # hh:mm:ss
 # max 23:59:59
-duration = "00:00:03"
+duration = "00:00:04"
 #duration = "23:59:59"
 auto_duration=True
 # if False, you have to manually specify:

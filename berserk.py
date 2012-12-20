@@ -1,13 +1,7 @@
-import math
-from time import time
-from datetime import datetime, timedelta
-import logging
+from datetime import datetime
+
+from log import log
 import benchmark_notifier
-
-def log(something):
-    print(something)
-    logging.info(something)
-
 
 # MEMORY
 #---------------------
@@ -43,22 +37,23 @@ def finalize(results):
     log("------------------\n")
     benchmark_notifier.notify_master(host=conf.host, data=results)
 
-def run_from_conf(conf): #TODO: run until datetime.now()==designated_time
-    logging.basicConfig(filename='berserk.log',
-                        level=logging.DEBUG,
-                        format='%(asctime)s %(message)s')
+def run_from_conf(conf):
+    if conf.auto_duration:
+        from plan_benchmark import plan_benchmark
+        tasks, task_size = plan_benchmark(conf.duration, conf.method)
+    else:
+        tasks, task_size = conf.tasks, conf.task_size
+    
     log("------------------\nBERSERK BENCHMARK\n------------------")
     dt1 = datetime.now()
     log("#start %s" % (str(dt1)))
     
-    if conf.method=="memory":
+    if conf.method=="memory":# TODO: fix this
         size_mb = conf.size
         run_period = conf.run_period
         memory(size_mb, run_period)
     elif conf.method=="cpu":
-        run_num = conf.iterations
-        n = conf.iteration_size
-        cpu(run_num, n)
+        cpu(tasks, task_size)
         
     dt2 = datetime.now()
     log("#end %s" % (str(dt2)))

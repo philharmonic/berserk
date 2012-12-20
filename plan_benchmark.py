@@ -20,16 +20,13 @@ in the _find_task_size function and then using the time of running this
 single task -- the **period** and estimate the run_num of tasks 
 that would make the whole benchmark's time at least the desired total time.
 '''
-import conf
-from fibonacci import fibonacci
-
 import timeit
 import numpy as np
 import math
 from datetime import datetime, timedelta
 
-def log(something):
-    print(something)
+import conf
+from log import log
     
 def _find_task_size(method, desired_period):
     """
@@ -88,6 +85,7 @@ def plan_benchmark(benchmark_duration, method):
     run_num, estimation = estimate_run(benchmark_duration, period)
     log("We estimate that doing %d tasks of size %d will last %s." 
         % (run_num, task_size, str(estimation)))
+    return run_num, task_size
 
 if __name__ == '__main__':
     plan_benchmark(conf.duration, conf.method)
