@@ -7,11 +7,10 @@ duration = "00:00:03"
 #duration = "23:59:59"
 auto_duration=True
 # if False, you have to manually specify:
-iterations = 3
-# single job complexity (e.g. n for Fibonacci) 
-iteration_size = 30
-# the approx. length of a single run cycle
-run_period = 1 # seconds
+tasks = 3
+# single task complexity (e.g. n for Fibonacci) 
+task_size = 30
+
 
 #methods avaliable:
 # - memory
@@ -28,3 +27,12 @@ size = 300 # MB
 #---------------------------------
 host = 'http://localhost:8088/'
 #host = 'http://snowwhite:8088/'
+
+# Benchmark estimation details
+#-------------------------------
+
+# the desired length of a single task
+period = 1 # seconds
+
+# number of repeats to get the estimated period
+repeats = 5
