@@ -1,0 +1,20 @@
+*.egg-info
+build/
+*.log
+**/.DS_Store
+*.pkl
+.coverage
+.settings
+
+*~
+
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+
+# Cython
+*.so
+*.c
+
+# profiling data
+mprofile_*.dat
