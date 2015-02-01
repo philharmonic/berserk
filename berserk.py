@@ -32,7 +32,7 @@ def cpu(run_num, n):
     log("Doing %d runs of %dth Fibonacci number calculation" % (run_num, n))
     for i in range(run_num):
         fib.fibonacci(n)
-    
+
 def finalize(results):
     log("------------------\n")
     benchmark_notifier.notify_master(host=conf.host, data=results)
@@ -43,18 +43,18 @@ def run_from_conf(conf):
         tasks, task_size = plan_benchmark(conf.duration, conf.method)
     else:
         tasks, task_size = conf.tasks, conf.task_size
-    
+
     log("------------------\nBERSERK BENCHMARK\n------------------")
     dt1 = datetime.now()
     log("#start %s" % (str(dt1)))
-    
+
     if conf.method=="memory":# TODO: fix this
         size_mb = conf.size
         run_period = conf.run_period
         memory(size_mb, run_period)
     elif conf.method=="cpu":
         cpu(tasks, task_size)
-        
+
     dt2 = datetime.now()
     log("#end %s" % (str(dt2)))
     dt_runtime = dt2-dt1
@@ -65,7 +65,7 @@ def run_from_conf(conf):
         finalize(results)
     except:
         log("Warning: Can't notify the benchmark master of the outcome.")
-    
+
 def sample_run():
     while True:
         #memory()
