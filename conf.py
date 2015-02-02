@@ -36,3 +36,13 @@ period = 1 # seconds
 
 # number of repeats to get the estimated period
 repeats = 5
+
+
+# I/O-bound benchmark settings
+#-----------------------------
+
+berserk_server_domain = 'localhost'
+berserk_server_port = 8089
+berserk_server_url = 'http://{}:{}/'.format(
+    berserk_server_domain, berserk_server_port
+)

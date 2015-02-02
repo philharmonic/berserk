@@ -7,6 +7,12 @@ import requests
 from log import log
 from berserk import finalize
 
+def send_requests(conf):
+    params = {'n': 10}
+    response = requests.get(conf.berserk_server_url, params=params)
+    result = response.json()['result']
+    log(result)
+
 def run_from_conf(conf):
     log("------------------\nBERSERK BENCHMARK\n------------------")
     dt1 = datetime.now()
@@ -14,6 +20,7 @@ def run_from_conf(conf):
 
     # send requests to berserk-server and collect the results
     # TODO: server-side
+    send_requests(conf)
 
     dt2 = datetime.now()
     log("#end %s" % (str(dt2)))
@@ -23,8 +30,8 @@ def run_from_conf(conf):
     results = (dt1, dt2)
     try:
         finalize(results)
-    except:
-        log("Warning: Can't notify the benchmark master of the outcome.")
+    except Exception as e:
+        log("Warning: Can't notify benchmark master. {}".format(str(e)))
 
 if __name__ == "__main__":
     #sample_run()

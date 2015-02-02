@@ -1,7 +1,6 @@
 from datetime import datetime
 
 from log import log
-import benchmark_notifier
 
 # MEMORY
 #---------------------
@@ -35,6 +34,7 @@ def cpu(run_num, n):
 
 def finalize(results):
     log("------------------\n")
+    import benchmark_notifier
     benchmark_notifier.notify_master(host=conf.host, data=results)
 
 def run_from_conf(conf):
@@ -63,8 +63,8 @@ def run_from_conf(conf):
     results = (dt1, dt2)
     try:
         finalize(results)
-    except:
-        log("Warning: Can't notify the benchmark master of the outcome.")
+    except Exception as e:
+        log("Warning: Can't notify benchmark master. {}".format(str(e)))
 
 def sample_run():
     while True:
