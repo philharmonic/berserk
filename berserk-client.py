@@ -8,7 +8,7 @@ from log import log
 from berserk import finalize
 
 def send_requests(conf):
-    params = {'n': 10}
+    params = {'tasks': 3, 'task_size': 10}
     response = requests.get(conf.berserk_server_url, params=params)
     result = response.json()['result']
     log(result)
@@ -19,8 +19,8 @@ def run_from_conf(conf):
     log("#start %s" % (str(dt1)))
 
     # send requests to berserk-server and collect the results
-    # TODO: server-side
     send_requests(conf)
+    # TODO: combine local and remote tasks
 
     dt2 = datetime.now()
     log("#end %s" % (str(dt2)))
@@ -34,6 +34,5 @@ def run_from_conf(conf):
         log("Warning: Can't notify benchmark master. {}".format(str(e)))
 
 if __name__ == "__main__":
-    #sample_run()
     import conf
     run_from_conf(conf)

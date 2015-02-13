@@ -23,8 +23,9 @@ app = Flask(__name__)
 
 @app.route("/")
 def hello():
-    n = int(request.args.get('n'))
-    berserk.cpu(1, n)
+    n = int(request.args.get('task_size'))
+    run_num = int(request.args.get('tasks'))
+    berserk.cpu(run_num, n)
     result_json = json.dumps({'result': True})
     return result_json
 
