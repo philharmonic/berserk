@@ -46,3 +46,6 @@ berserk_server_port = 8089
 berserk_server_url = 'http://{}:{}/'.format(
     berserk_server_domain, berserk_server_port
 )
+
+# the ratio of tasks to perform remotely on the server
+remote_task_ratio = 0.3

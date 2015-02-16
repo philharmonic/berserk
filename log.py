@@ -14,5 +14,5 @@ def initialize():
 def log(something):
     print(something)
     logging.info(something)
-    
+
 initialize()

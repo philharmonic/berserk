@@ -5,10 +5,10 @@ from datetime import datetime
 import requests
 
 from log import log
-from berserk import finalize
+from berserk import finalize, cpu
 
-def send_requests(conf):
-    params = {'tasks': 3, 'task_size': 10}
+def send_requests(tasks, task_size):
+    params = {'tasks': tasks, 'task_size': task_size}
     response = requests.get(conf.berserk_server_url, params=params)
     result = response.json()['result']
     log(result)
@@ -18,9 +18,13 @@ def run_from_conf(conf):
     dt1 = datetime.now()
     log("#start %s" % (str(dt1)))
 
+    tasks, task_size = conf.tasks, conf.task_size
+    tasks_remote = int(round(tasks * conf.remote_task_ratio))
+    tasks_local =  tasks - tasks_remote
     # send requests to berserk-server and collect the results
-    send_requests(conf)
-    # TODO: combine local and remote tasks
+    send_requests(tasks_remote, task_size)
+    # TODO: interlace local and remote tasks
+    cpu(tasks_local, task_size)
 
     dt2 = datetime.now()
     log("#end %s" % (str(dt2)))

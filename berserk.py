@@ -31,6 +31,7 @@ def cpu(run_num, n):
     log("Doing %d runs of %dth Fibonacci number calculation" % (run_num, n))
     for i in range(run_num):
         fib.fibonacci(n)
+    log("Finished.")
 
 def finalize(results):
     log("------------------\n")
