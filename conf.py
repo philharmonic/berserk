@@ -7,7 +7,7 @@ duration = "00:00:04"
 #duration = "23:59:59"
 auto_duration=True
 # if False, you have to manually specify:
-tasks = 3
+tasks = 6
 # single task complexity (e.g. n for Fibonacci) 
 task_size = 30
 
@@ -49,3 +49,11 @@ berserk_server_url = 'http://{}:{}/'.format(
 
 # the ratio of tasks to perform remotely on the server
 remote_task_ratio = 0.3
+
+# the number of rounds that local/remote execution is switched
+# e.g.
+# - tasks = 30
+# - remote_task_ratio = 0.3
+# - local_remote_rounds = 1 -> 10 remote, 20 local
+# - local_remote_rounds = 2 -> 5 remote, 10 local, 5 remote, 10 local
+local_remote_rounds = 2

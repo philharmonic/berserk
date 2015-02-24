@@ -21,10 +21,21 @@ def run_from_conf(conf):
     tasks, task_size = conf.tasks, conf.task_size
     tasks_remote = int(round(tasks * conf.remote_task_ratio))
     tasks_local =  tasks - tasks_remote
-    # send requests to berserk-server and collect the results
-    send_requests(tasks_remote, task_size)
-    # TODO: interlace local and remote tasks
-    cpu(tasks_local, task_size)
+
+    done_tasks_local = 0
+    done_tasks_remote = 0
+    tasks_remote_round = tasks_remote / conf.local_remote_rounds
+    tasks_local_round = tasks_local / conf.local_remote_rounds
+
+    # interlace local and remote tasks
+    while done_tasks_local< tasks_local and done_tasks_remote< tasks_remote:
+        # send requests to berserk-server and collect the results
+        log('Sending {} remote tasks'.format(tasks_remote_round))
+        send_requests(tasks_remote_round, task_size)
+        done_tasks_remote += tasks_remote_round
+        log('Doing {} local tasks'.format(tasks_local_round))
+        cpu(tasks_local_round, task_size)
+        done_tasks_local += tasks_local_round
 
     dt2 = datetime.now()
     log("#end %s" % (str(dt2)))
