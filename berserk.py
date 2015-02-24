@@ -28,13 +28,11 @@ def memory(size_mb,run_period):
 
 def cpu(run_num, n):
     import fibonacci as fib
-    log("Doing %d runs of %dth Fibonacci number calculation" % (run_num, n))
+    log("Doing {} runs of {}th Fibonacci num. calculation.".format(run_num, n))
     for i in range(run_num):
         fib.fibonacci(n)
-    log("Finished.")
 
 def finalize(results):
-    log("------------------\n")
     import benchmark_notifier
     benchmark_notifier.notify_master(host=conf.host, data=results)
 
@@ -66,6 +64,7 @@ def run_from_conf(conf):
         finalize(results)
     except Exception as e:
         log("Warning: Can't notify benchmark master. {}".format(str(e)))
+    log("\n------------------\n")
 
 def sample_run():
     while True:

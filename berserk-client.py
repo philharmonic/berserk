@@ -1,20 +1,21 @@
 """The client side of the I/O-bound Berserk benchmark"""
 
 from datetime import datetime
+import logging
 
 import requests
 
-from log import log
+from log import log_client as log
 from berserk import finalize, cpu
 
 def send_requests(tasks, task_size):
     params = {'tasks': tasks, 'task_size': task_size}
     response = requests.get(conf.berserk_server_url, params=params)
     result = response.json()['result']
-    log(result)
+    return result
 
 def run_from_conf(conf):
-    log("------------------\nBERSERK BENCHMARK\n------------------")
+    log("\n------------------\nBERSERK BENCHMARK\n------------------\n")
     dt1 = datetime.now()
     log("#start %s" % (str(dt1)))
 
@@ -30,8 +31,9 @@ def run_from_conf(conf):
     # interlace local and remote tasks
     while done_tasks_local< tasks_local and done_tasks_remote< tasks_remote:
         # send requests to berserk-server and collect the results
-        log('Sending {} remote tasks'.format(tasks_remote_round))
+        log('Sending {} remote tasks...'.format(tasks_remote_round))
         send_requests(tasks_remote_round, task_size)
+        log("... Done.")
         done_tasks_remote += tasks_remote_round
         log('Doing {} local tasks'.format(tasks_local_round))
         cpu(tasks_local_round, task_size)
@@ -47,6 +49,7 @@ def run_from_conf(conf):
         finalize(results)
     except Exception as e:
         log("Warning: Can't notify benchmark master. {}".format(str(e)))
+        log("\n------------------\n")
 
 if __name__ == "__main__":
     import conf

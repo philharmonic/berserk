@@ -7,7 +7,7 @@ from flask import request
 
 import conf
 import berserk
-from log import log
+from log import log_server as log
 import json
 
 # class MainHandler(tornado.web.RequestHandler):
