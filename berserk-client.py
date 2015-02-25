@@ -25,11 +25,14 @@ def run_from_conf(conf):
 
     done_tasks_local = 0
     done_tasks_remote = 0
-    tasks_remote_round = tasks_remote / conf.local_remote_rounds
-    tasks_local_round = tasks_local / conf.local_remote_rounds
+    tasks_remote_round = int(round(tasks_remote /
+                                   float(conf.local_remote_rounds)))
+    tasks_local_round = int(round(tasks_local /
+                                  float(conf.local_remote_rounds)))
 
     # interlace local and remote tasks
-    while done_tasks_local< tasks_local and done_tasks_remote< tasks_remote:
+    while done_tasks_local < tasks_local and done_tasks_remote < tasks_remote:
+        # TODO: perform local and remote tasks in parallel
         # send requests to berserk-server and collect the results
         log('Sending {} remote tasks...'.format(tasks_remote_round))
         send_requests(tasks_remote_round, task_size)

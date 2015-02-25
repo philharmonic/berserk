@@ -31,8 +31,8 @@ def hello():
 
 
 if __name__ == "__main__":
-    log('Berserk I/O-bound benchmark server listening on: {}'.format(
-        conf.berserk_server_url)
+    log('Berserk I/O-bound benchmark server listening on port {}'.format(
+        conf.berserk_server_port)
     )
     # application.listen(conf.berserk_server_port)
     # tornado.ioloop.IOLoop.instance().start()
