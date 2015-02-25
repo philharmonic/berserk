@@ -37,4 +37,4 @@ if __name__ == "__main__":
     # application.listen(conf.berserk_server_port)
     # tornado.ioloop.IOLoop.instance().start()
     #app.debug = True
-    app.run(port=conf.berserk_server_port)
+    app.run(host='0.0.0.0', port=conf.berserk_server_port)
