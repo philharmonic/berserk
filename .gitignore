@@ -18,3 +18,6 @@ __pycache__/
 
 # profiling data
 mprofile_*.dat
+
+# output files
+*.csv

@@ -7,6 +7,7 @@ import requests
 
 from log import log_client as log
 from berserk import finalize, cpu
+from monitor import Monitor
 
 def send_requests(tasks, task_size):
     params = {'tasks': tasks, 'task_size': task_size}
@@ -15,6 +16,10 @@ def send_requests(tasks, task_size):
     return result
 
 def run_from_conf(conf):
+    # CPU monitoring
+    mon = Monitor()
+    mon.start()
+
     log("\n------------------\nBERSERK BENCHMARK\n------------------\n")
     dt1 = datetime.now()
     log("#start %s" % (str(dt1)))
@@ -30,9 +35,21 @@ def run_from_conf(conf):
     tasks_local_round = int(round(tasks_local /
                                   float(conf.local_remote_rounds)))
 
+    try:
+        local_rounds = tasks_local / tasks_local_round
+    except ZeroDivisionError:
+        local_rounds = 0
+    try:
+        remote_rounds = tasks_remote / tasks_remote_round
+    except ZeroDivisionError:
+        remote_rounds = 0
+    num = max(local_rounds, remote_rounds)
+    log('Doing approx. {} interlaced local/remote rounds.'.format(num))
+
     # interlace local and remote tasks
-    while done_tasks_local < tasks_local and done_tasks_remote < tasks_remote:
+    while done_tasks_local < tasks_local or done_tasks_remote < tasks_remote:
         # TODO: perform local and remote tasks in parallel
+        # TODO: perform the CPU calculations in a process pool to use all cores
         # send requests to berserk-server and collect the results
         log('Sending {} remote tasks...'.format(tasks_remote_round))
         send_requests(tasks_remote_round, task_size)
@@ -53,6 +70,10 @@ def run_from_conf(conf):
     except Exception as e:
         log("Warning: Can't notify benchmark master. {}".format(str(e)))
         log("\n------------------\n")
+
+    # stop monitoring
+    mon.queue.put('quit')
+    mon.join()
 
 if __name__ == "__main__":
     import conf
