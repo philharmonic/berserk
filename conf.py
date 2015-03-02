@@ -5,7 +5,7 @@
 # max 23:59:59
 duration = "00:00:04"
 #duration = "23:59:59"
-auto_duration=True
+auto_duration = False
 # if False, you have to manually specify:
 tasks = 60
 # single task complexity (e.g. n for Fibonacci)
@@ -41,8 +41,8 @@ repeats = 5
 # I/O-bound benchmark settings
 #-----------------------------
 
-#berserk_server_domain = 'localhost'
-berserk_server_domain = 'happy'
+berserk_server_domain = 'localhost'
+#berserk_server_domain = 'happy'
 berserk_server_port = 8089
 berserk_server_url = 'http://{}:{}/'.format(
     berserk_server_domain, berserk_server_port

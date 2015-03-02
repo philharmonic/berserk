@@ -1,6 +1,6 @@
 """A background process to monitor CPU usage."""
 
-from Queue import Empty
+from queue import Empty
 from multiprocessing import Process, Queue
 from log import log_client as log
 #import time

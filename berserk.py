@@ -1,4 +1,5 @@
 from datetime import datetime
+import concurrent.futures
 
 from log import log
 
@@ -29,8 +30,15 @@ def memory(size_mb,run_period):
 def cpu(run_num, n):
     import fibonacci as fib
     log("Doing {} runs of {}th Fibonacci num. calculation.".format(run_num, n))
-    for i in range(run_num):
-        fib.fibonacci(n)
+    # a process worker will be generated for every core by default
+    with concurrent.futures.ProcessPoolExecutor() as executor:
+        # we map all the tasks over the process pool
+        for result in executor.map(fib.fibonacci, (n for i in range(run_num))):
+            # collect the results by iterating over the map (no timeout)
+            pass # optionally do sth with the result
+    # old single-core version
+    # for i in range(run_num):
+    #     fib.fibonacci(n)
 
 def finalize(results):
     import benchmark_notifier

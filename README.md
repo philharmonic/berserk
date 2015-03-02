@@ -7,7 +7,12 @@ completion notifications.
 Development installation
 ========================
 
+- requires Python 3 (due to the `concurrent.futures` module)
 - cd to the root of the project (e.g. `~/code/berserk/`)
+- install the dependencies
+
+        pip install -r requirements.txt
+
 - build the extensions
 
         python setup.py build
