@@ -21,3 +21,6 @@ mprofile_*.dat
 
 # output files
 *.csv
+
+# virtualenv
+venv

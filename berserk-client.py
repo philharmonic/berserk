@@ -10,6 +10,8 @@ from berserk import finalize, cpu
 from monitor import Monitor
 
 def send_requests(tasks, task_size):
+    if tasks == 0:
+        return
     params = {'tasks': tasks, 'task_size': task_size}
     response = requests.get(conf.berserk_server_url, params=params)
     result = response.json()['result']

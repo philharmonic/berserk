@@ -49,7 +49,7 @@ berserk_server_url = 'http://{}:{}/'.format(
 )
 
 # the ratio of tasks to perform remotely on the server
-remote_task_ratio = 0.2
+remote_task_ratio = 0.
 
 # the number of rounds that local/remote execution is switched
 # e.g.
