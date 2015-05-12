@@ -43,7 +43,7 @@ def cpu(run_num, n):
 
 def finalize(results):
     with open("io/results.pkl", "wb") as results_pkl:
-        pickle.dump(results, results_pkl)
+        pickle.dump(results, results_pkl, protocol=2)
     import benchmark_notifier
     benchmark_notifier.notify_master(host=conf.host, data=results)
 
