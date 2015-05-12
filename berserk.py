@@ -1,5 +1,6 @@
 from datetime import datetime
 import concurrent.futures
+import pickle
 
 from log import log
 
@@ -41,6 +42,8 @@ def cpu(run_num, n):
     #     fib.fibonacci(n)
 
 def finalize(results):
+    with open("io/results.pkl", "wb") as results_pkl:
+        pickle.dump(results, results_pkl)
     import benchmark_notifier
     benchmark_notifier.notify_master(host=conf.host, data=results)
 

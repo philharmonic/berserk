@@ -25,7 +25,7 @@ class Monitor(Process):
 
     def _finalize(self):
         self.util = pd.DataFrame(self.measurements, self.times)
-        self.util.to_csv('measurements.csv')
+        self.util.to_csv('io/measurements.csv')
         log('Mean CPU utilisation: {}'.format(self.util.mean().mean()))
 
     def run(self):
